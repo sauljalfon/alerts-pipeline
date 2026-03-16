@@ -1,0 +1,14 @@
+[project]
+name = "alarms-intelligent-pipeline"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "apache-airflow>=3.1.8",
+    "dbt-bigquery>=1.11.1",
+    "google-cloud-bigquery>=3.40.1",
+    "google-cloud-storage>=2.4,<3.2",
+    "python-dotenv>=1.2.2",
+    "requests>=2.32.5",
+]

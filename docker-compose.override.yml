@@ -1,0 +1,53 @@
+x-project-env: &project-env
+  AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+  GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/secrets/service-account-key.json
+  GCP_PROJECT_ID: ${GCP_PROJECT_ID}
+
+x-project-volumes: &project-volumes
+  - ./service-account-key.json:/opt/airflow/secrets/service-account-key.json:ro
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+
+  airflow-apiserver:
+    environment:
+      <<: *project-env
+    volumes: *project-volumes
+
+  airflow-scheduler:
+    environment:
+      <<: *project-env
+    volumes: *project-volumes
+
+  airflow-dag-processor:
+    environment:
+      <<: *project-env
+    volumes: *project-volumes
+
+  airflow-worker:
+    environment:
+      <<: *project-env
+    volumes: *project-volumes
+
+  airflow-triggerer:
+    environment:
+      <<: *project-env
+    volumes: *project-volumes
+
+  grafana:
+    image: grafana/grafana:latest
+    env_file: .env
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana:/etc/grafana/provisioning
+    restart: unless-stopped
+
+volumes:
+  grafana_data:
