@@ -1,0 +1,17 @@
+name: alarms_pipeline
+profile: alarms_pipeline
+
+seed-paths: ["seeds"]
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  alarms_pipeline:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
