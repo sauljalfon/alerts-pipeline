@@ -8,3 +8,4 @@ select
     ingested_at
 
 from {{ source('alarms', 'raw_alerts') }}
+WHERE category NOT IN (13, 14)
