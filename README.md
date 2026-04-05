@@ -1,4 +1,4 @@
-# Israel Alarms Intelligence Pipeline
+# Israel Alarms Pipeline
 
 An end-to-end data pipeline that ingests live Tzeva Adom (Israeli rocket alert) data, enriches it, stores it in BigQuery, and surfaces it through an AI-powered Streamlit dashboard.
 
