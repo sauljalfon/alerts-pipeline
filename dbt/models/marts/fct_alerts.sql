@@ -33,7 +33,7 @@ final as (
 
     from alarms
     left join cities
-        on alarms.city = cities.name
+        on TRIM(split(alarms.city, ' - ')[offset(0)]) = cities.name
 )
 
 select * from final
