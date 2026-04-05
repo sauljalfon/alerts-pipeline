@@ -13,5 +13,17 @@ models:
   alarms_pipeline:
     staging:
       +materialized: view
+      +schema: staging_dataset
     marts:
       +materialized: table
+      +schema: analysis_dataset
+
+seeds:
+  alarms_pipeline:
+    +schema: raw_dataset
+    cities:
+      +column_types:
+        cityId: INT64
+        population: INT64
+        createdAt: TIMESTAMP
+        updatedAt: TIMESTAMP

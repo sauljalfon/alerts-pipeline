@@ -11,4 +11,11 @@ dependencies = [
     "google-cloud-storage>=2.4,<3.2",
     "python-dotenv>=1.2.2",
     "requests>=2.32.5",
+    "streamlit>=1.45.0",
+]
+
+[dependency-groups]
+dev = [
+    "selenium>=4.41.0",
+    "webdriver-manager>=4.0.2",
 ]

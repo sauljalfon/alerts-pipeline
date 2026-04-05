@@ -1,0 +1,27 @@
+seeds:
+  - name: cities
+    description: reference table of Israeli cities with coordinates and population
+    columns:
+      - name: name
+        description: city name
+        data_tests:
+          - not_null
+      - name: population
+        description: city population
+      - name: location
+        description: coordinates in the format (latitude, longitude)
+        data_tests:
+          - not_null
+      - name: cityId
+        description: unique city identifier
+        data_tests:
+          - unique
+          - not_null
+      - name: createdAt
+        description: timestamp when the record was created
+        data_tests:
+          - not_null
+      - name: updatedAt
+        description: timestamp when the record was last updated
+        data_tests:
+          - not_null

@@ -1,0 +1,31 @@
+models:
+  - name: stg_alarms__alarms
+    description: a staging table for alarms
+    columns:
+      - name: alarm_id
+        description: primary key
+        data_tests:
+          - unique
+          - not_null
+      - name: city
+        description: city where the alarm was triggered
+        data_tests:
+          - not_null
+      - name: ingested_at
+        description: timestamp when the alarm was ingested
+        data_tests:
+          - not_null
+      - name: alerted_at
+        description: timestamp when the alarm was alerted
+        data_tests:
+          - not_null
+      - name: category
+        description: category of the alarm
+        data_tests:
+          - not_null
+      - name: category_desc
+        description: human-readable description of the alarm category
+        data_tests:
+          - not_null
+      - name: matrix_id
+        description: identifier for the alert matrix zone

@@ -4,7 +4,7 @@ x-project-env: &project-env
   GCP_PROJECT_ID: ${GCP_PROJECT_ID}
 
 x-project-volumes: &project-volumes
-  - ./service-account-key.json:/opt/airflow/secrets/service-account-key.json:ro
+  - ./secrets:/opt/airflow/secrets:ro
 
 services:
   postgres:
@@ -36,18 +36,17 @@ services:
       <<: *project-env
     volumes: *project-volumes
 
-  grafana:
-    image: grafana/grafana:latest
+  streamlit:
+    build:
+      context: ./streamlit
+      dockerfile: Dockerfile
     env_file: .env
     environment:
-      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
-      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      GOOGLE_APPLICATION_CREDENTIALS: /app/secrets/service-account-key.json
+      GCP_PROJECT_ID: ${GCP_PROJECT_ID}
     ports:
-      - "3000:3000"
+      - "8501:8501"
     volumes:
-      - grafana_data:/var/lib/grafana
-      - ./grafana:/etc/grafana/provisioning
+      - ./streamlit:/app
+      - ./secrets:/app/secrets:ro
     restart: unless-stopped
-
-volumes:
-  grafana_data:

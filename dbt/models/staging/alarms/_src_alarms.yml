@@ -1,0 +1,36 @@
+sources:
+  - name: alarms
+    database: alarms-intelligent-pipeline
+    schema: raw_dataset
+    tables:
+      - name: raw_alerts
+        description: a raw alerts table
+        columns:
+          - name: rid
+            description: primary key
+            data_tests:
+              - unique
+              - not_null
+          - name: data
+            description: city or area name where the alarm was triggered
+            data_tests:
+              - not_null
+          - name: alertDate
+            description: timestamp of the alarm in Asia/Jerusalem timezone
+            data_tests:
+              - not_null
+          - name: category
+            description: numeric category code of the alarm
+            data_tests:
+              - not_null
+          - name: category_desc
+            description: human-readable description of the alarm category
+            data_tests:
+              - not_null
+          - name: matrix_id
+            description: identifier for the alert matrix zone
+          - name: ingested_at
+            description: timestamp when the record was ingested into the raw table
+            data_tests:
+              - not_null
+

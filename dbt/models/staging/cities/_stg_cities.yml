@@ -1,0 +1,31 @@
+models:
+  - name: stg_cities__cities
+    description: staged cities reference table with parsed coordinates
+    columns:
+      - name: city_id
+        description: unique city identifier
+        data_tests:
+          - unique
+          - not_null
+      - name: name
+        description: city name
+        data_tests:
+          - not_null
+      - name: population
+        description: city population
+      - name: latitude
+        description: latitude extracted from the location field
+        data_tests:
+          - not_null
+      - name: longitude
+        description: longitude extracted from the location field
+        data_tests:
+          - not_null
+      - name: created_at
+        description: timestamp when the record was created
+        data_tests:
+          - not_null
+      - name: updated_at
+        description: timestamp when the record was last updated
+        data_tests:
+          - not_null

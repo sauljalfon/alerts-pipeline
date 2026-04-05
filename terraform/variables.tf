@@ -13,5 +13,5 @@ variable "region" {
 variable "service_account_key_path" {
   description = "Local path where the service account key JSON will be written"
   type        = string
-  default     = "../service-account-key.json"
+  default     = "../secrets/service-account-key.json"
 }

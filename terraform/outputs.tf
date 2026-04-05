@@ -5,7 +5,7 @@ output "raw_landing_bucket" {
 
 output "bigquery_dataset" {
   description = "BigQuery dataset ID"
-  value       = google_bigquery_dataset.info_dataset.dataset_id
+  value       = google_bigquery_dataset.raw_dataset.dataset_id
 }
 
 output "service_account_email" {

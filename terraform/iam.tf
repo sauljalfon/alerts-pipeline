@@ -7,6 +7,8 @@ locals {
   pipeline_roles = [
     "roles/bigquery.dataEditor",
     "roles/bigquery.jobUser",
+    "roles/bigquery.dataViewer",
+    "roles/bigquery.readSessionUser",
     "roles/storage.objectAdmin",
   ]
 }
