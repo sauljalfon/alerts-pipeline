@@ -1,5 +1,6 @@
 streamlit>=1.45.0
 google-cloud-bigquery>=3.40.1
+google-auth>=2.0.0
 pandas>=2.0.0
 db-dtypes>=1.0.0
 google-generativeai>=0.8.0

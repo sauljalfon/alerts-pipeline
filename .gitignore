@@ -25,6 +25,7 @@ service-account-key.json
 *service-account*   ← catches any service account file variation
 *.pem
 *.p12
+.streamlit/secrets.toml
 
 # OS
 .DS_Store           ← you're on Mac, this will appear everywhere
