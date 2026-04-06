@@ -9,7 +9,7 @@ from google.api_core.exceptions import NotFound
 
 PROJECT_ID = os.environ["GCP_PROJECT_ID"]
 
-st.set_page_config(page_title="Israel Alarms Intelligence", layout="wide")
+st.set_page_config(page_title="Israel Alarms", layout="wide")
 st.title("Israel Alarms Dashboard")
 
 client = bigquery.Client(project=PROJECT_ID)
