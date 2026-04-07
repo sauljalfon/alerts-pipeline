@@ -25,13 +25,13 @@ with DAG(
 
     wait_for_bq = TimeDeltaSensor(
         task_id="wait_for_bq",
-        delta=timedelta(minutes=2),
+        delta=timedelta(seconds=30),
     )
 
     dbt_build = DockerOperator(
         task_id="dbt_build",
         image=DBT_IMAGE,
-        command="dbt build --project-dir /dbt --profiles-dir /root/.dbt",
+        command="build --project-dir /dbt --profiles-dir /root/.dbt",
         mounts=[
             Mount(
                 source=DBT_SECRETS_SOURCE,

@@ -29,7 +29,9 @@ services:
   airflow-worker:
     environment:
       <<: *project-env
-    volumes: *project-volumes
+    volumes:
+      - ./secrets:/opt/airflow/secrets:ro
+      - /var/run/docker.sock:/var/run/docker.sock
 
   airflow-triggerer:
     environment:
