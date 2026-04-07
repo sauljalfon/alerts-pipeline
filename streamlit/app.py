@@ -8,7 +8,13 @@ from google.cloud import bigquery
 from google.api_core.exceptions import NotFound
 
 # Support both Streamlit Cloud secrets and local env vars
-PROJECT_ID = st.secrets.get("GCP_PROJECT_ID", os.environ.get("GCP_PROJECT_ID", ""))
+def _secret(key):
+    try:
+        return st.secrets[key]
+    except Exception:
+        return None
+
+PROJECT_ID = _secret("GCP_PROJECT_ID") or os.environ.get("GCP_PROJECT_ID", "")
 if not PROJECT_ID:
     st.error("GCP_PROJECT_ID is not set. Add it to Streamlit secrets or environment variables.")
     st.stop()
@@ -17,12 +23,11 @@ st.set_page_config(page_title="Israel Alarms", layout="wide")
 st.title("Israel Alarms Dashboard")
 
 # Use service account credentials from secrets when available (Streamlit Cloud),
-# otherwise fall back to ADC (local / GCE).
-if "gcp_service_account" in st.secrets:
+# otherwise fall back to ADC (local / GCE via GOOGLE_APPLICATION_CREDENTIALS).
+_sa = _secret("gcp_service_account")
+if _sa:
     from google.oauth2 import service_account
-    _creds = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"]
-    )
+    _creds = service_account.Credentials.from_service_account_info(_sa)
     client = bigquery.Client(project=PROJECT_ID, credentials=_creds)
 else:
     client = bigquery.Client(project=PROJECT_ID)
@@ -190,7 +195,7 @@ The SQL query returned these results:
 {results}
 Answer in 1-3 clear sentences. Be direct and specific with numbers. If results are empty, say so."""
 
-    gemini_key = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
+    gemini_key = _secret("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY", "")
     if not gemini_key:
         st.error("GEMINI_API_KEY environment variable is not set.")
     else:
