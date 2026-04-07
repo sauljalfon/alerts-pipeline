@@ -1,7 +1,7 @@
 from airflow.providers.standard.operators.python import PythonOperator
 from airflow.sdk import DAG
 
-from assets import alerts_asset
+from config import alerts_asset
 from operators.gcs_operators import _save_to_gcs
 from operators.oref_operator import _fetch_alerts
 
