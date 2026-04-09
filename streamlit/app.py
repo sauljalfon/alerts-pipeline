@@ -224,6 +224,16 @@ Answer in 1-3 clear sentences. Be direct and specific with numbers. If results a
                         sql = sql_response.text.strip()
                         sql = re.sub(r"^```sql\s*|^```\s*|```$", "", sql, flags=re.MULTILINE).strip()
 
+                        # Step 2: Validate SQL
+
+                        sql_lower = sql.strip().lower()
+                        if not sql_lower.startswith("select"):
+                            st.error("Generated SQL must start with SELECT.")
+                            st.stop()                    
+                        
+                        if "analysis_dataset.fct_alerts" not in sql:
+                            raise ValueError("Generated SQL must query the fct_alerts table.")
+
                         # Step 2: run SQL on BigQuery
                         result_df = client.query(sql).to_dataframe()
                         results_str = result_df.to_string(index=False) if not result_df.empty else "No results."
